@@ -1,0 +1,14 @@
+import os
+import datetime
+import random
+
+# Створює зміни у файлі, щоб було що комітити
+with open("data.txt", "a") as f:
+    f.write(str(datetime.datetime.now()) + "\n")
+
+# Команди Git
+os.system('git config --global user.name "Marik0023"')
+os.system('git config --global user.email "breykerr42@gmail.com"')
+os.system('git add .')
+os.system('git commit -m "Automated commit" || echo "No changes to commit"')
+os.system('git push')
