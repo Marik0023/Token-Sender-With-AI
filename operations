@@ -1,14 +1,30 @@
 import os
-import datetime
 import random
+import datetime
 
-# Створює зміни у файлі, щоб було що комітити
-with open("data.txt", "a") as f:
-    f.write(str(datetime.datetime.now()) + "\n")
+MAX_COMMITS_PER_DAY = 200
 
-# Команди Git
-os.system('git config --global user.name "Marik0023"')
-os.system('git config --global user.email "breykerr42@gmail.com"')
-os.system('git add .')
-os.system('git commit -m "Automated commit" || echo "No changes to commit"')
-os.system('git push')
+templates = [
+    "Refactor: tidy up imports and spacing",
+    "Docs: add short example for API usage",
+    "Chore: update dependency versions (minor)",
+    "Tests: add simple unit test for utils",
+    "Format: run code formatter",
+    "Note: learning log — played with X feature",
+]
+
+def append_journal_entry():
+    entry = f"{datetime.datetime.utcnow().isoformat()} - {random.choice(templates)}\n"
+    with open("journal.md", "a", encoding="utf-8") as f:
+        f.write(entry)
+
+def run():
+    commits = random.randint(1, MAX_COMMITS_PER_DAY)
+    for i in range(commits):
+        append_journal_entry()
+        # git actions will handle commit/push in workflow
+        # small sleep to avoid identical timestamps if needed
+        # time.sleep(random.uniform(1,5))
+
+if __name__ == "__main__":
+    run()
